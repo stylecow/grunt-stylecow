@@ -1,0 +1,44 @@
+{
+  "name": "grunt-stylecow",
+  "description": "Execute stylecow plugins with grunt",
+  "version": "0.1.0",
+  "homepage": "https://github.com/oscarotero/grunt-stylecow",
+  "author": {
+    "name": "oscarotero",
+    "email": "oom@oscarotero.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oscarotero/grunt-stylecow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/oscarotero/grunt-stylecow/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/oscarotero/grunt-stylecow/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.9.2",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-nodeunit": "^0.3.3",
+    "grunt": "~0.4.5"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5"
+  },
+  "keywords": [
+    "gruntplugin"
+  ],
+  "dependencies": {
+    "stylecow": "^1.2.0-rc2"
+  }
+}
