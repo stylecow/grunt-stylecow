@@ -2,22 +2,22 @@
   "name": "grunt-stylecow",
   "description": "Execute stylecow plugins with grunt",
   "version": "0.1.0",
-  "homepage": "https://github.com/oscarotero/grunt-stylecow",
+  "homepage": "https://github.com/stylecow/grunt-stylecow",
   "author": {
     "name": "oscarotero",
     "email": "oom@oscarotero.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/oscarotero/grunt-stylecow.git"
+    "url": "git://github.com/stylecow/grunt-stylecow.git"
   },
   "bugs": {
-    "url": "https://github.com/oscarotero/grunt-stylecow/issues"
+    "url": "https://github.com/stylecow/grunt-stylecow/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/oscarotero/grunt-stylecow/blob/master/LICENSE-MIT"
+      "url": "https://github.com/stylecow/grunt-stylecow/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
