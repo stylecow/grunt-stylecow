@@ -13,7 +13,7 @@ var stylecow = require('stylecow');
 module.exports = function(grunt) {
 
     grunt.registerMultiTask('stylecow', 'Execute stylecow plugins with grunt', function() {
-        var options = this.options(stylecow.config.defaults);
+        var options = this.options(stylecow.defaults);
 
         stylecow.setConfig(options);
 
