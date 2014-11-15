@@ -18,20 +18,41 @@ module.exports = function(grunt) {
         stylecow.setConfig(options);
 
         this.files.forEach(function(f) {
-            var src = f.src.filter(function(filepath) {
+            var css;
+
+            f.src.filter(function(filepath) {
                 if (!grunt.file.exists(filepath)) {
                     grunt.log.warn('Source file "' + filepath + '" not found.');
                     return false;
                 } else {
                     return true;
                 }
-            }).map(function(filepath) {
-                return stylecow.convertFromFile(filepath).toCode();
-            }).join('');
+            }).forEach(function(filepath) {
+                var parsed = stylecow.createFromFile(filepath);
 
-            grunt.file.write(f.dest, src);
+                if (!css) {
+                    css = parsed;
+                } else {
+                    stylecow.merge(css, parsed);
+                }
+            });
 
+            css.executeTasks(stylecow.tasks);
+
+            var code = new stylecow.Code(css, {
+                file: f.dest,
+                style: options.code,
+                sourceMap: options.sourceMap,
+                sourceMapFile: options.sourceMapFile
+            });
+
+            grunt.file.write(f.dest, code.code);
             grunt.log.writeln('File "' + f.dest + '" created.');
+
+            if (options.sourceMapFile) {
+                grunt.file.write(f.dest, code.mapString);
+                grunt.log.writeln('File "' + options.sourceMapFile + '" created.');
+            }
         });
     });
 };
