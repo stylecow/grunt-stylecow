@@ -50,7 +50,7 @@ module.exports = function(grunt) {
             grunt.log.writeln('File "' + f.dest + '" created.');
 
             if (options.sourceMapFile) {
-                grunt.file.write(f.dest, code.mapString);
+                grunt.file.write(options.sourceMapFile, code.mapString);
                 grunt.log.writeln('File "' + options.sourceMapFile + '" created.');
             }
         });
