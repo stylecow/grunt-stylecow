@@ -42,16 +42,16 @@ module.exports = function(grunt) {
             var code = new stylecow.Code(css, {
                 file: f.dest,
                 style: options.code,
-                sourceMap: options.sourceMap,
-                sourceMapFile: options.sourceMapFile
+                previousSourceMap: options.previousSourceMap,
+                sourceMap: options.sourceMap
             });
 
             grunt.file.write(f.dest, code.code);
             grunt.log.writeln('File "' + f.dest + '" created.');
 
-            if (options.sourceMapFile) {
-                grunt.file.write(options.sourceMapFile, code.mapString);
-                grunt.log.writeln('File "' + options.sourceMapFile + '" created.');
+            if ((typeof options.sourceMap === 'string') && options.sourceMap !== 'embed') {
+                grunt.file.write(options.sourceMap, JSON.stringify(code.map));
+                grunt.log.writeln('File "' + options.sourceMap + '" created.');
             }
         });
     });
