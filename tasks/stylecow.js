@@ -13,9 +13,23 @@ var stylecow = require('stylecow');
 module.exports = function(grunt) {
 
     grunt.registerMultiTask('stylecow', 'Execute stylecow plugins with grunt', function() {
-        var options = this.options(stylecow.defaults);
+        var config = this.options({});
 
-        stylecow.setConfig(options);
+        if (config.support) {
+            stylecow.minSupport(config.support);
+        }
+
+        if (config.plugins) {
+            config.plugins.forEach(function (plugin) {
+                stylecow.loadPlugin(plugin);
+            });
+        }
+
+        if (config.modules) {
+            config.modules.forEach(function (module) {
+                stylecow.loadNpmModule(module);
+            });
+        }
 
         this.files.forEach(function(f) {
             var css;
@@ -28,30 +42,32 @@ module.exports = function(grunt) {
                     return true;
                 }
             }).forEach(function(filepath) {
-                var parsed = stylecow.createFromFile(filepath);
+                parsed = stylecow.Root.create(stylecow.Reader.readFile(filepath));
 
                 if (!css) {
                     css = parsed;
                 } else {
-                    stylecow.merge(css, parsed);
+                    while (parsed.length) {
+                        css.push(parsed[0]);
+                    }
                 }
             });
 
-            css.executeTasks(stylecow.tasks);
+            stylecow.run(css);
 
             var code = new stylecow.Code(css, {
                 file: f.dest,
-                style: options.code,
-                previousSourceMap: options.previousSourceMap,
-                sourceMap: options.sourceMap
+                style: config.code,
+                previousSourceMap: config.previousSourceMap,
+                sourceMap: config.sourceMap
             });
 
             grunt.file.write(f.dest, code.code);
             grunt.log.writeln('File "' + f.dest + '" created.');
 
-            if ((typeof options.sourceMap === 'string') && options.sourceMap !== 'embed') {
-                grunt.file.write(options.sourceMap, JSON.stringify(code.map));
-                grunt.log.writeln('File "' + options.sourceMap + '" created.');
+            if ((typeof config.sourceMap === 'string') && config.sourceMap !== 'embed') {
+                grunt.file.write(config.sourceMap, JSON.stringify(code.map));
+                grunt.log.writeln('File "' + config.sourceMap + '" created.');
             }
         });
     });
