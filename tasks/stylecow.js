@@ -54,9 +54,10 @@ module.exports = function(grunt) {
                 }
             });
 
+
             stylecow.run(css);
 
-            var code = new stylecow.Code(css, {
+            var code = new stylecow.Coder(css, {
                 file: f.dest,
                 style: config.code,
                 previousSourceMap: config.previousSourceMap,

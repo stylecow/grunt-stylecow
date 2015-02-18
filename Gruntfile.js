@@ -30,20 +30,10 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     stylecow: {
-      default_options: {
-        options: {
-        },
+      test1: {
+        options: require('./test/fixtures/styles.json'),
         files: {
-          'tmp/default_options': ['test/fixtures/testing', 'test/fixtures/123']
-        }
-      },
-      custom_options: {
-        options: {
-          separator: ': ',
-          punctuation: ' !!!'
-        },
-        files: {
-          'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123']
+          'tmp/styles.css': ['test/fixtures/styles.css']
         }
       }
     },
