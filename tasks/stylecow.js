@@ -38,11 +38,12 @@ module.exports = function(grunt) {
                 if (!grunt.file.exists(filepath)) {
                     grunt.log.warn('Source file "' + filepath + '" not found.');
                     return false;
-                } else {
-                    return true;
                 }
-            }).forEach(function(filepath) {
-                parsed = stylecow.Root.create(stylecow.Reader.readFile(filepath));
+
+                return true;
+            })
+            .forEach(function(filepath) {
+                var parsed = stylecow.Root.create(stylecow.Reader.readFile(filepath));
 
                 if (!css) {
                     css = parsed;
