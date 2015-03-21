@@ -61,15 +61,15 @@ module.exports = function(grunt) {
                 file: f.dest,
                 style: config.code,
                 previousSourceMap: config.previousSourceMap,
-                sourceMap: config.sourceMap
+                sourceMap: config.map
             });
 
             grunt.file.write(f.dest, code.code);
             grunt.log.writeln('File "' + f.dest + '" created.');
 
-            if ((typeof config.sourceMap === 'string') && config.sourceMap !== 'embed') {
-                grunt.file.write(config.sourceMap, JSON.stringify(code.map));
-                grunt.log.writeln('File "' + config.sourceMap + '" created.');
+            if ((typeof config.map === 'string') && config.map !== 'embed') {
+                grunt.file.write(config.map, JSON.stringify(code.map));
+                grunt.log.writeln('File "' + config.map + '" created.');
             }
         });
     });
