@@ -1,4 +1,8 @@
 {
+	"files": [{
+		"input": "styles.css",
+		"output": "../expected/styles.css"
+	}],
 	"support": {
 		"explorer": 8,
 		"firefox": 30,
@@ -13,6 +17,7 @@
 		"fixes",
 		"flex",
 		"matches",
+		"import",
 		"msfilter-background-alpha",
 		"msfilter-linear-gradient",
 		"msfilter-transform",
@@ -21,5 +26,5 @@
 		"rem",
 		"variables"
 	],
-	"code": "normal"
+	"code": "minify"
 }

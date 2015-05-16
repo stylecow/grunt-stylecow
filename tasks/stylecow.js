@@ -12,7 +12,7 @@ var stylecow = require('stylecow');
 
 module.exports = function(grunt) {
 
-    grunt.registerMultiTask('stylecow', 'Execute stylecow plugins with grunt', function() {
+    grunt.registerMultiTask('stylecow', 'Execute stylecow with grunt', function() {
         var config = this.options({});
 
         if (config.support) {
@@ -43,17 +43,16 @@ module.exports = function(grunt) {
                 return true;
             })
             .forEach(function(filepath) {
-                var parsed = stylecow.Root.create(stylecow.Reader.readFile(filepath));
+                var parsed = stylecow.parseFile(filepath);
 
                 if (!css) {
                     css = parsed;
                 } else {
-                    while (parsed.length) {
+                    while (parsed[0]) {
                         css.push(parsed[0]);
                     }
                 }
             });
-
 
             stylecow.run(css);
 

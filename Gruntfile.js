@@ -31,7 +31,7 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     stylecow: {
       test1: {
-        options: require('./test/fixtures/styles.json'),
+        options: require('./test/fixtures/stylecow.json'),
         files: {
           'tmp/styles.css': ['test/fixtures/styles.css']
         }
