@@ -8,7 +8,7 @@
 
 'use strict';
 
-var stylecow = require('stylecow');
+var stylecow = require('stylecow-core');
 
 module.exports = function(grunt) {
 
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
         if (config.plugins) {
             config.plugins.forEach(function (plugin) {
-                stylecow.loadPlugin(plugin);
+                stylecow.loadNpmModule('stylecow-plugin-' + plugin);
             });
         }
 
