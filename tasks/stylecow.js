@@ -13,21 +13,25 @@ var stylecow = require('stylecow-core');
 module.exports = function(grunt) {
 
     grunt.registerMultiTask('stylecow', 'Execute stylecow with grunt', function() {
-        var config = this.options({});
+        var config = this.options({}),
+            tasks  = new stylecow.Tasks(),
+            coder  = new stylecow.Coder(config.code);
+
+        coder.sourceMap(config.map || 'none');
 
         if (config.support) {
-            stylecow.minSupport(config.support);
+            tasks.minSupport(config.support);
         }
 
         if (config.plugins) {
             config.plugins.forEach(function (plugin) {
-                stylecow.loadNpmModule('stylecow-plugin-' + plugin);
+                tasks.use(require('stylecow-plugin-' + plugin));
             });
         }
 
         if (config.modules) {
             config.modules.forEach(function (module) {
-                stylecow.loadNpmModule(module);
+                stylecow.use(require(module));
             });
         }
 
@@ -54,20 +58,15 @@ module.exports = function(grunt) {
                 }
             });
 
-            stylecow.run(css);
+            tasks.run(css);
 
-            var code = new stylecow.Coder(css, {
-                file: f.dest,
-                style: config.code,
-                previousSourceMap: config.previousSourceMap,
-                sourceMap: config.map
-            });
+            var code = coder.run(css, f.dest, undefined, config.previousSourceMap);
 
-            grunt.file.write(f.dest, code.code);
+            grunt.file.write(f.dest, code.css);
             grunt.log.writeln('File "' + f.dest + '" created.');
 
-            if ((typeof config.map === 'string') && config.map !== 'embed') {
-                grunt.file.write(config.map, JSON.stringify(code.map));
+            if ((typeof config.map === 'string') && code.map) {
+                grunt.file.write(config.map, code.map);
                 grunt.log.writeln('File "' + config.map + '" created.');
             }
         });
