@@ -2,13 +2,14 @@
  * grunt-stylecow
  * https://github.com/oscarotero/grunt-stylecow
  *
- * Copyright (c) 2014 oscarotero
+ * Copyright (c) 2015 oscarotero
  * Licensed under the MIT license.
  */
 
 'use strict';
 
-var stylecow = require('stylecow-core');
+var stylecow = require('stylecow-core'),
+    plugins  = require('stylecow-plugins');
 
 module.exports = function(grunt) {
 
@@ -23,11 +24,7 @@ module.exports = function(grunt) {
             tasks.minSupport(config.support);
         }
 
-        if (config.plugins) {
-            config.plugins.forEach(function (plugin) {
-                tasks.use(require('stylecow-plugin-' + plugin));
-            });
-        }
+        tasks.use(plugins(config.plugins));
 
         if (config.modules) {
             config.modules.forEach(function (module) {
