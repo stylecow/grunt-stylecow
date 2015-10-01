@@ -50,14 +50,26 @@ grunt.initConfig({
             ],
             "code": "normal"
         },
-        dist: {
-            files: {
-                'css/styles.min.css': ['./css/styles.css']
-            }
+        files: {
+            'css/styles.min.css': ['./css/styles.css']
         }
     }
 });
 ```
+
+Or, if you have a `stylecow.json` file with your configuration:
+
+```js
+grunt.initConfig({
+    stylecow: {
+        options: require('./stylecow.json')
+        files: {
+            'css/styles.min.css': ['./css/styles.css']
+        }
+    }
+});
+```
+
 
 ### Options
 
@@ -69,11 +81,7 @@ Minimal browser support required
 #### options.plugins
 Type: `Array`
 
-The stylecow plugins to execute. You must install the plugins before, using npm. For example, to install the "prefixes" plugin:
-
-```shell
-npm install stylecow-plugin-prefixes --save-dev
-```
+The stylecow plugins to execute. [List of all available plugins](http://stylecow.github.io/#plugins)
 
 #### options.code
 Type: `String`
