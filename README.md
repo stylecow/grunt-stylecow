@@ -81,7 +81,7 @@ Minimal browser support required
 #### options.plugins
 Type: `Array`
 
-The stylecow plugins to execute. [List of all available plugins](http://stylecow.github.io/#plugins)
+The stylecow plugins to execute. [List of all available plugins](http://stylecow.github.io/plugins)
 
 #### options.code
 Type: `String`
