@@ -57,7 +57,7 @@ module.exports = function(grunt) {
 
             tasks.run(css);
 
-            var code = coder.run(css, f.dest, undefined, config.previousSourceMap);
+            var code = coder.run(css, f.dest, config.previousSourceMap);
 
             grunt.file.write(f.dest, code.css);
             grunt.log.writeln('File "' + f.dest + '" created.');
