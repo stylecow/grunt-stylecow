@@ -25,33 +25,35 @@ In your project's Gruntfile, add a section named `stylecow` to the data object p
 ```js
 grunt.initConfig({
     stylecow: {
-        options: {
-            "support": {
-                "explorer": 10,
-                "firefox": 30,
-                "chrome": 35,
-                "safari": 6,
-                "opera": 22,
-                "android": 4,
-                "ios": 6
+        config: {
+            options: {
+                "support": {
+                    "explorer": 10,
+                    "firefox": 30,
+                    "chrome": 35,
+                    "safari": 6,
+                    "opera": 22,
+                    "android": 4,
+                    "ios": 6
+                },
+                "plugins": [
+                    "color",
+                    "fixes",
+                    "flex",
+                    "import",
+                    "initial",
+                    "linear-gradient",
+                    "matches",
+                    "nested-rules",
+                    "prefixes",
+                    "rem",
+                    "variables"
+                ],
+                "code": "normal"
             },
-            "plugins": [
-                "color",
-                "fixes",
-                "flex",
-                "import",
-                "initial",
-                "linear-gradient",
-                "matches",
-                "nested-rules",
-                "prefixes",
-                "rem",
-                "variables"
-            ],
-            "code": "normal"
-        },
-        files: {
-            'css/styles.min.css': ['./css/styles.css']
+            files: {
+                'css/styles.min.css': ['./css/styles.css']
+            }
         }
     }
 });
@@ -62,9 +64,11 @@ Or, if you have a `stylecow.json` file with your configuration:
 ```js
 grunt.initConfig({
     stylecow: {
-        options: require('./stylecow.json')
-        files: {
-            'css/styles.min.css': ['./css/styles.css']
+        config: {
+            options: require('./stylecow.json')
+            files: {
+                'css/styles.min.css': ['./css/styles.css']
+            }
         }
     }
 });
