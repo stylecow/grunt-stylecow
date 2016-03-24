@@ -59,7 +59,7 @@ module.exports = function(grunt) {
                 tasks.run(css);
             } catch (error) {
                 if (config.cssErrors) {
-                    css = stylecow.cssError(err);
+                    css = stylecow.cssError(error);
                 } else {
                     throw error;
                 }
