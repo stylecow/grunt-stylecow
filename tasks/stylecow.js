@@ -35,27 +35,35 @@ module.exports = function(grunt) {
         this.files.forEach(function(f) {
             var css;
 
-            f.src.filter(function(filepath) {
-                if (!grunt.file.exists(filepath)) {
-                    grunt.log.warn('Source file "' + filepath + '" not found.');
-                    return false;
-                }
-
-                return true;
-            })
-            .forEach(function(filepath) {
-                var parsed = stylecow.parseFile(filepath);
-
-                if (!css) {
-                    css = parsed;
-                } else {
-                    while (parsed[0]) {
-                        css.push(parsed[0]);
+            try {
+                f.src.filter(function(filepath) {
+                    if (!grunt.file.exists(filepath)) {
+                        grunt.log.warn('Source file "' + filepath + '" not found.');
+                        return false;
                     }
-                }
-            });
 
-            tasks.run(css);
+                    return true;
+                })
+                .forEach(function(filepath) {
+                    var parsed = stylecow.parseFile(filepath);
+
+                    if (!css) {
+                        css = parsed;
+                    } else {
+                        while (parsed[0]) {
+                            css.push(parsed[0]);
+                        }
+                    }
+                });
+
+                tasks.run(css);
+            } catch (error) {
+                if (config.cssErrors) {
+                    css = stylecow.cssError(err);
+                } else {
+                    throw error;
+                }
+            }
 
             var code = coder.run(css, f.dest, config.previousSourceMap);
 
