@@ -1,7 +1,7 @@
 {
   "name": "grunt-stylecow",
   "description": "Execute stylecow plugins with grunt",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "homepage": "https://github.com/stylecow/grunt-stylecow",
   "author": {
     "name": "oscarotero",
@@ -34,7 +34,7 @@
     "gruntplugin"
   ],
   "dependencies": {
-    "stylecow-core": "^2.3.0",
-    "stylecow-plugins": "^1.5.0"
+    "stylecow-core": "^2.4.0",
+    "stylecow-plugins": "^1.5.2"
   }
 }
